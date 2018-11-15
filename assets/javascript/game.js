@@ -13,7 +13,7 @@ var pickedCharacter = movieCharacters[randomNumber];
 // Set up an empty array that will contain the letters of the word to guess
 var lettersToGuess = [];
 
-// Fill up the array lettersToGuess with the letters that make the name of the character picked
+// Fill up the array lettersToGuess with the letters that make up the name of the character picked
 for (var i = 0; i < pickedCharacter.length; i++) {
     lettersToGuess.push(pickedCharacter[i]);
 }
@@ -21,7 +21,7 @@ for (var i = 0; i < pickedCharacter.length; i++) {
 // Set up an empty array where the correct guesses will be gradually stored
 var lettersGuessed = [];
 
-// Pre-fill the array of letters guessed with underscore characters
+// Pre-fill the empty array with the appropriate quantity of underscore characters
 for (var i = 0; i < pickedCharacter.length; i++) {
     lettersGuessed.push("_");
 }
@@ -56,9 +56,12 @@ function addToAttempted(userInput) {
     lettersTried.push(userInput);
 }
 
-// Create function that reduces the number of available guesses
+// Create function that reduces the number of available guesses, unless the userInput was typed before or it was a correct guess
 function subtractAttempt(userInput) {
     if (lettersTried.indexOf(userInput) > -1 && lettersTried.indexOf(userInput) < (lettersTried.length-1)) {
+        guessesLeft = guessesLeft;
+    }
+    else if (lettersToGuess.indexOf(userInput) > -1) {
         guessesLeft = guessesLeft;
     }
     else {
