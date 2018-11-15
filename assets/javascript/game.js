@@ -2,7 +2,7 @@
 // ===========================================================================================
 
 // Create array with the movie characters
-var movieCharacters = ["MARTY", "JENNIFER", "DOC", "GEORGE", "LORRAINE", "BIFF", "STRICKLAND"];
+var movieCharacters = ["MARTY", "JENNIFER", "DOC", "GEORGE", "LORRAINE", "BIFF", "STRICKLAND", "GRIFF", "MARLENE", "BUFORD", "CLARA", "SEAMUS", "MAGGIE"];
 
 // Generate a random number within the length of the array
 var randomNumber = Math.floor(Math.random() * movieCharacters.length);
