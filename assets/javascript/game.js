@@ -21,7 +21,7 @@ for (var i = 0; i < pickedCharacter.length; i++) {
 // Set up an empty array where the correct guesses will be gradually stored
 var lettersGuessed = [];
 
-// Pre-fill the empty array with the appropriate quantity of underscore characters
+// Pre-fill the empty array lettersGuessed with underscore characters
 for (var i = 0; i < pickedCharacter.length; i++) {
     lettersGuessed.push("_");
 }
@@ -38,11 +38,17 @@ var alphabetArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
 //Create empty variable for user input
 var userInput;
 
+// Create variables for sounds
+var typingSound = new Audio('./assets/sounds/typewriter.mp3');
+var winningSound = new Audio('./assets/sounds/ta-da.mp3');
+var losingSound = new Audio('./assets/sounds/sad-trombone.mp3');
+
+
 
 // FUNCTIONS
 // ===========================================================================================
 
-// Create function that recognizes any correct guesses and inserts them into the lettersGuessed array
+// Create function that recognizes the correct guesses and inserts them into the lettersGuessed array
 function characterCheck(userInput) {
     for (var i = 0; i < pickedCharacter.length; i++) {
         if (lettersToGuess[i].indexOf(userInput) > -1) {
@@ -51,7 +57,7 @@ function characterCheck(userInput) {
     }
 }
 
-// Create function to list all guesses (right or wrong)
+// Create function to store all guesses (right or wrong) in the lettersTried array
 function addToAttempted(userInput) {
     lettersTried.push(userInput);
 }
@@ -71,13 +77,23 @@ function subtractAttempt(userInput) {
 
 // Create function to populate the HTML
 function populateHTML() {
-    document.getElementById("guessesLeft").innerText = guessesLeft;
+    document.getElementById("guessesLeft").innerText = "Attempts left: " + guessesLeft;
     document.getElementById("lettersGuessed").innerText = lettersGuessed;
-    document.getElementById("lettersTried").innerText = lettersTried;
+    document.getElementById("lettersTried").innerText = "So far you have tried: " + lettersTried;
+    document.getElementById("totalWins").innerText = "Wins: " + localStorage.getItem("wins").length;
 }
 
 //Execute function to send initial data to the HTML
 populateHTML();
+
+//Create function to define a wait time in milliseconds before the next line of code is executed
+function wait(ms){
+    var start = new Date().getTime();
+    var end = start;
+    while(end < start + ms) {
+      end = new Date().getTime();
+   }
+ }
 
 
 
@@ -97,17 +113,23 @@ document.onkeydown = function(event) {
         characterCheck(userInput);
         addToAttempted(userInput);
         subtractAttempt(userInput);
+        typingSound.play();
         populateHTML();
     }
 
     // End the game if all the letters have been correctly guessed
     if (lettersGuessed.indexOf("_") === -1) {
-        window.location = 'you-win.html';
+        winningSound.play();
+        localStorage.setItem("wins", (localStorage.getItem("wins") + 1));
+        alert("You WIN!! The character is " + pickedCharacter + ". Click OK to play again.");
+        location.reload();
     }
 
     // End the game if there are no more guesses available
     else if (guessesLeft < 1) {
-        window.location = 'game-over.html';
+        losingSound.play();
+        alert("You lose!! The character was " + pickedCharacter + ". Click OK to try again.");
+        location.reload();
     }
 
 }
