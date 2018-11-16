@@ -35,8 +35,13 @@ var guessesLeft = 10;
 // Create list of acceptable letters
 var alphabetArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
-//Create empty variable for user input
+// Create empty variable for user input
 var userInput;
+
+// Create item to store score (if this is the first game within the browser session)
+if (sessionStorage.getItem("wins") === null) {
+    sessionStorage.setItem("wins", 1);
+}
 
 // Create variables for sounds
 var typingSound = new Audio('./assets/sounds/typewriter.mp3');
@@ -80,20 +85,11 @@ function populateHTML() {
     document.getElementById("guessesLeft").innerText = "Attempts left: " + guessesLeft;
     document.getElementById("lettersGuessed").innerText = lettersGuessed;
     document.getElementById("lettersTried").innerText = "So far you have tried: " + lettersTried;
-    document.getElementById("totalWins").innerText = "Wins: " + localStorage.getItem("wins").length;
+    document.getElementById("totalWins").innerText = "Wins: " + (sessionStorage.getItem("wins").length - 1);
 }
 
 //Execute function to send initial data to the HTML
 populateHTML();
-
-//Create function to define a wait time in milliseconds before the next line of code is executed
-function wait(ms){
-    var start = new Date().getTime();
-    var end = start;
-    while(end < start + ms) {
-      end = new Date().getTime();
-   }
- }
 
 
 
@@ -120,7 +116,7 @@ document.onkeydown = function(event) {
     // End the game if all the letters have been correctly guessed
     if (lettersGuessed.indexOf("_") === -1) {
         winningSound.play();
-        localStorage.setItem("wins", (localStorage.getItem("wins") + 1));
+        sessionStorage.setItem("wins", (sessionStorage.getItem("wins") + 1));
         alert("You WIN!! The character is " + pickedCharacter + ". Click OK to play again.");
         location.reload();
     }
