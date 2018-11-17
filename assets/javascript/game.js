@@ -84,7 +84,7 @@ function subtractAttempt(userInput) {
 function populateHTML() {
     document.getElementById("guessesLeft").innerText = "Attempts left: " + guessesLeft;
     document.getElementById("lettersGuessed").innerText = lettersGuessed;
-    document.getElementById("lettersTried").innerText = "So far you have tried: " + lettersTried;
+    document.getElementById("lettersTried").innerText = "So far you have typed: " + lettersTried;
     document.getElementById("totalWins").innerText = "Wins: " + (sessionStorage.getItem("wins").length - 1);
 }
 
@@ -117,14 +117,14 @@ document.onkeydown = function(event) {
     if (lettersGuessed.indexOf("_") === -1) {
         winningSound.play();
         sessionStorage.setItem("wins", (sessionStorage.getItem("wins") + 1));
-        alert("You WIN!! The character is " + pickedCharacter + ". Click OK to play again.");
+        alert("You WIN!! The character is \"" + pickedCharacter + "\". Click OK to play again.");
         location.reload();
     }
 
     // End the game if there are no more guesses available
     else if (guessesLeft < 1) {
         losingSound.play();
-        alert("You lose!! The character was " + pickedCharacter + ". Click OK to try again.");
+        alert("You lose!! The character was \"" + pickedCharacter + "\". Click OK to try again.");
         location.reload();
     }
 

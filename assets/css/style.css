@@ -35,11 +35,11 @@
   .container {
     position: fixed;
     top: 10px;
-    left: 50px;
+    left: 10px;
   }
 
   .footer {
     position: fixed;
     bottom: 10px;
-    left: 50px;
+    left: 10px;;
   }
