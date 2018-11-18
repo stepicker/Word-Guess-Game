@@ -117,15 +117,27 @@ document.onkeydown = function(event) {
     if (lettersGuessed.indexOf("_") === -1) {
         winningSound.play();
         sessionStorage.setItem("wins", (sessionStorage.getItem("wins") + 1));
-        alert("You WIN!! The character is \"" + pickedCharacter + "\". Click OK to play again.");
-        location.reload();
+        swal({
+            title: "You win!!",
+            text: "The character is \"" + pickedCharacter + "\". Click OK to play again.",
+            icon: "success",
+          })
+          .then((value) => {
+            if (value = true) { location.reload(); };
+          });
     }
 
     // End the game if there are no more guesses available
     else if (guessesLeft < 1) {
         losingSound.play();
-        alert("You lose!! The character was \"" + pickedCharacter + "\". Click OK to try again.");
-        location.reload();
+        swal({
+            title: "You lose!!",
+            text: "The character was \"" + pickedCharacter + "\". Click OK to play again.",
+            icon: "error",
+          })
+          .then((value) => {
+            if (value = true) { location.reload(); };
+          });
     }
 
 }
