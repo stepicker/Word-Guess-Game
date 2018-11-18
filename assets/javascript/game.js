@@ -116,6 +116,7 @@ document.onkeydown = function(event) {
     // End the game if all the letters have been correctly guessed
     if (lettersGuessed.indexOf("_") === -1) {
         winningSound.play();
+        document.onkeydown = null;
         sessionStorage.setItem("wins", (sessionStorage.getItem("wins") + 1));
         swal({
             title: "You win!!",
@@ -130,6 +131,7 @@ document.onkeydown = function(event) {
     // End the game if there are no more guesses available
     else if (guessesLeft < 1) {
         losingSound.play();
+        document.onkeydown = null;
         swal({
             title: "You lose!!",
             text: "The character was \"" + pickedCharacter + "\". Click OK to play again.",
