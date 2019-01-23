@@ -16,4 +16,4 @@ Assignment for my Coding Bootcamp at Penn University.
 
 ## Ready to play?
 
-Head to https://stepicker.github.io/Word-Guess-Name
+Head to https://stepicker.github.io/Word-Guess-Game/
