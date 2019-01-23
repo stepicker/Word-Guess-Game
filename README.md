@@ -5,7 +5,7 @@ Assignment for my Coding Bootcamp at Penn University.
 
 ## How the game works
 
-- A random character from "Back to the Future" is selected at the start of each game, with a hint to test your knowledge of the movie.
+- A random character from "Back to the Future" is selected at the start of each game.
 
 - Using your keyboard, you can try and guess the letters that make up the name.
 
